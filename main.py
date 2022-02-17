@@ -14,12 +14,22 @@ screen.tracer(0)
 screen.listen()
 
 player = Player(STARTING_POSITION)
+car_manager = CarManager()
 
 screen.onkey(player.move, "Up")
 
+loop_counter = 0
 game_is_on = True
-
 while game_is_on:
+    if loop_counter == 0:
+        car_manager.add_car()
+
+    loop_counter += 1
+    if loop_counter > 6:
+        loop_counter = 0
+
+    car_manager.move()
+
     time.sleep(0.1)
     screen.update()
 
