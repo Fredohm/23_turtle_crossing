@@ -36,6 +36,12 @@ while game_is_on:
         car_manager.increase_speed()
         scoreboard.update_scoreboard()
 
+    for car in car_manager.cars:
+        if car.distance(player) < 20:
+            player.hideturtle()
+            game_is_on = False
+            scoreboard.game_over()
+
     time.sleep(0.1)
     screen.update()
 
