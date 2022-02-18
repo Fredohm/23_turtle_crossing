@@ -23,7 +23,6 @@ class CarManager:
         car.setheading(180)
         car.goto(300, randint(-250, 250))
         self.cars.append(car)
-        print(len(self.cars))
         return self
 
     def move(self):
@@ -32,3 +31,8 @@ class CarManager:
 
     def increase_speed(self):
         self.speed += MOVE_INCREMENT
+        if self.loop_counter > 0:
+            self.loop_counter -= 1
+
+    def set_loop_counter(self):
+        return self.loop_counter

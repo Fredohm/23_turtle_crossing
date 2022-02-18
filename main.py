@@ -26,7 +26,7 @@ while game_is_on:
         car_manager.add_car()
 
     loop_counter += 1
-    if loop_counter > 6:
+    if loop_counter > car_manager.set_loop_counter():
         loop_counter = 0
 
     car_manager.move()
