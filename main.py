@@ -13,6 +13,7 @@ screen.tracer(0)
 
 screen.listen()
 
+scoreboard = Scoreboard()
 player = Player(STARTING_POSITION)
 car_manager = CarManager()
 
@@ -29,6 +30,11 @@ while game_is_on:
         loop_counter = 0
 
     car_manager.move()
+
+    if player.ycor() > 280:
+        player.goto(STARTING_POSITION)
+        car_manager.increase_speed()
+        scoreboard.update_scoreboard()
 
     time.sleep(0.1)
     screen.update()

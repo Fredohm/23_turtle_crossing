@@ -4,11 +4,14 @@ from random import choice, randint
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 10
+STARTING_LOOP_COUNTER = 6
 
 
 class CarManager:
 
     def __init__(self):
+        self.speed = STARTING_MOVE_DISTANCE
+        self.loop_counter = STARTING_LOOP_COUNTER
         self.cars = []
         self.add_car()
 
@@ -25,10 +28,7 @@ class CarManager:
 
     def move(self):
         for car in self.cars:
-            car.forward(STARTING_MOVE_DISTANCE)
-            if car.xcor() < -300:
-                self.remove()
+            car.forward(self.speed)
 
-    def remove(self):
-        for index in range(len(self.cars)):
-            self.cars[index].clear()
+    def increase_speed(self):
+        self.speed += MOVE_INCREMENT
