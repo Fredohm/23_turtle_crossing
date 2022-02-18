@@ -16,14 +16,15 @@ class CarManager:
         self.add_car()
 
     def add_car(self):
-        car = Turtle("square")
-        car.color(choice(COLORS))
-        car.shapesize(stretch_wid=1, stretch_len=2)
-        car.penup()
-        car.setheading(180)
-        car.goto(300, randint(-250, 250))
-        self.cars.append(car)
-        return self
+        random_chance = randint(1, 6)
+        if random_chance == 1:
+            car = Turtle("square")
+            car.color(choice(COLORS))
+            car.shapesize(stretch_len=2)
+            car.penup()
+            car.setheading(180)
+            car.goto(300, randint(-250, 250))
+            self.cars.append(car)
 
     def move(self):
         for car in self.cars:
@@ -33,6 +34,3 @@ class CarManager:
         self.speed += MOVE_INCREMENT
         if self.loop_counter > 0:
             self.loop_counter -= 1
-
-    def set_loop_counter(self):
-        return self.loop_counter

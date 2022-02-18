@@ -3,7 +3,6 @@ from turtle import Screen
 from player import Player, STARTING_POSITION
 from car_manager import CarManager
 from scoreboard import Scoreboard
-from random import randint
 
 
 screen = Screen()
@@ -19,28 +18,24 @@ car_manager = CarManager()
 
 screen.onkey(player.move, "Up")
 
-loop_counter = 0
 game_is_on = True
 while game_is_on:
-    if loop_counter == 0:
-        car_manager.add_car()
-
-    loop_counter += 1
-    if loop_counter > car_manager.set_loop_counter():
-        loop_counter = 0
+    car_manager.add_car()
 
     car_manager.move()
 
-    if player.ycor() > 280:
-        player.goto(STARTING_POSITION)
-        car_manager.increase_speed()
-        scoreboard.update_scoreboard()
-
+    # detect collision with car
     for car in car_manager.cars:
         if car.distance(player) < 20:
             player.hideturtle()
             game_is_on = False
             scoreboard.game_over()
+
+    # detect successful crossing
+    if player.is_at_finish_line():
+        player.go_to_starting_position()
+        car_manager.increase_speed()
+        scoreboard.increase_level()
 
     time.sleep(0.1)
     screen.update()
